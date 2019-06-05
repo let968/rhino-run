@@ -17,9 +17,7 @@ export class Skier extends Entity {
         this.updateAsset();
     }
 
-    updateAsset() {
-        console.log(this.direction,Constants.SKIER_DIRECTION_ASSET);
-        
+    updateAsset() {        
         this.assetName = Constants.SKIER_DIRECTION_ASSET[this.direction];
     }
 
