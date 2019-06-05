@@ -68,7 +68,7 @@ export class Skier extends Entity {
             this.moveSkierLeft();
         }
 
-        // Fixed but that crashed game on moving left afer hitting an obstacle
+        // Fixed bug that crashed game on moving left afer hitting an obstacle
         else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH){
             this.setDirection(1);
             this.moveSkierLeft();
@@ -82,6 +82,11 @@ export class Skier extends Entity {
         if(this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
             this.moveSkierRight();
         }
+        // Fixed bug where you cannot move right after collision
+        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH){
+            this.setDirection(5);
+            this.moveSkierRight();
+        } 
         else {
             this.setDirection(this.direction + 1);
         }
