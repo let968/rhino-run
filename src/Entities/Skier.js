@@ -18,6 +18,8 @@ export class Skier extends Entity {
     }
 
     updateAsset() {
+        console.log(this.direction,Constants.SKIER_DIRECTION_ASSET);
+        
         this.assetName = Constants.SKIER_DIRECTION_ASSET[this.direction];
     }
 
@@ -65,6 +67,12 @@ export class Skier extends Entity {
         if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }
+
+        // Fixed but that crashed game on moving left afer hitting an obstacle
+        else if(this.direction === Constants.SKIER_DIRECTIONS.CRASH){
+            this.setDirection(1);
+            this.moveSkierLeft();
+        } 
         else {
             this.setDirection(this.direction - 1);
         }
@@ -90,7 +98,9 @@ export class Skier extends Entity {
     }
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
+        
         const asset = assetManager.getAsset(this.assetName);
+        
         const skierBounds = new Rect(
             this.x - asset.width / 2,
             this.y - asset.height / 2,
