@@ -60,9 +60,7 @@ export class Game {
         this.gameWindow = new Rect(left, top, left + Constants.GAME_WIDTH, top + Constants.GAME_HEIGHT);
     }
 
-    handleKeyDown(event) {
-        console.log(event.which);
-                
+    handleKeyDown(event) {             
         switch(event.which) {
             case Constants.KEYS.LEFT:
                 this.skier.turnLeft();
@@ -73,7 +71,7 @@ export class Game {
                 event.preventDefault();
                 break;
             case Constants.KEYS.UP:
-                this.skier.turnUp();
+                this.skier.startJump();
                 event.preventDefault();
                 break;
             case Constants.KEYS.DOWN:
