@@ -25,12 +25,7 @@ const config = {
             },
             {
                 test: /\.png$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        publicPath: '../img'
-                    }
-                }],
+                use: ['file-loader'],
             }
         ]
     },
