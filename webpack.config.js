@@ -28,7 +28,7 @@ const config = {
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        publicPath: 'img'
+                        publicPath: '/img'
                     }
                 }],
             }
