@@ -5,7 +5,7 @@ export class Rhino extends Entity{
 
     assetName = Constants.RHINO_STRIDE_LEFT;
     speed = Constants.SKIER_STARTING_SPEED;
-    eat = 0
+    speedBoost = 1;
 
     constructor(x,y){
         super(x,y);
@@ -38,16 +38,15 @@ export class Rhino extends Entity{
     }
 
     moveDown(){
-        this.y += this.speed;
+        this.y += this.speed * this.speedBoost;
     }
 
     runMotion(){
         this.assetName = this.assetName == Constants.RHINO_STRIDE_LEFT ? Constants.RHINO_STRIDE_RIGHT : Constants.RHINO_STRIDE_LEFT;
 
-        if( !this.eat ){
-            setTimeout(() => {
-                this.runMotion();
-            }, Constants.SKIER_STARTING_SPEED * 30);
-        }
+        setTimeout(() => {
+            this.runMotion();
+        }, this.speed * 30);
+        
     }
 }

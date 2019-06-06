@@ -106,11 +106,11 @@ export class Menu{
                             img.src = ASSETS[RHINO_END_GAME[4]];
                             setTimeout(() => {                  
                                 img.src = ASSETS[RHINO_END_GAME[5]];
-                            }, 500);
-                        }, 500);
-                    }, 500);
-                }, 500);
-            }, 500);
-        }, 500);
+                            }, 300);
+                        }, 300);
+                    }, 300);
+                }, 300);
+            }, 300);
+        }, 300);
     }
 }

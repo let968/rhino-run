@@ -33,7 +33,7 @@ export class Game{
     init() {
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
         this.skier = new Skier(0, 0);
-        this.rhino = new Rhino(0, -200);
+        this.rhino = null;
         this.obstacleManager = new ObstacleManager();
         this.obstacleManager.placeInitialObstacles();
 
@@ -50,7 +50,7 @@ export class Game{
         this.init();
 
         //Used to load obstacles in before game starts
-         this.run();
+        this.run();
         this.updateScore(0);
 
         setTimeout(() => {
@@ -87,20 +87,29 @@ export class Game{
     }
 
     updateGameWindow() {
+        const skierPosition = this.skier.getPosition();
+        const skierAsset = this.skier.getAssetName();
+        this.skier.move();
+        this.updateScore(skierPosition.y);
         
-        if( !intersectTwoEntities(this.skier.getPosition(),this.rhino.getPosition()) ){
-            this.skier.move();
-
-            const skierAsset = this.skier.getAssetName();
+        const previousGameWindow = this.gameWindow;
+        this.calculateGameWindow();
+        this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
+        this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
+        
+        if( !this.rhino && this.menu.score > 7500 ){
+            this.rhino = new Rhino(skierPosition.x, skierPosition.y - 500);
+            this.rhino.speedBoost = 1.25;
+        } else if( this.rhino ){
+            if( this.rhino.speed > 1 && skierPosition.y - this.rhino.getPosition().y < 150 ){
+                this.rhino.speedBoost = 1;
+            }
             this.rhino.move(skierAsset);
-            this.updateScore(this.skier.getPosition().y);
+        }
 
-            const previousGameWindow = this.gameWindow;
-            this.calculateGameWindow();
-            this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
-            this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
-
-        } else {
+        
+        //if rhino reached player end the game
+        if( this.rhino && intersectTwoEntities(this.skier.getPosition(),this.rhino.getPosition()) ) {
             this.state = 'O';
             this.menu.addOverlay(this.state);
         }
@@ -109,9 +118,12 @@ export class Game{
 
     drawGameWindow() {
         this.canvas.setDrawOffset(this.gameWindow.left, this.gameWindow.top);
-
         this.skier.draw(this.canvas, this.assetManager);
-        this.rhino.draw(this.canvas, this.assetManager);
+        
+        if( this.rhino ){
+            this.rhino.draw(this.canvas, this.assetManager);
+        }
+
         this.obstacleManager.drawObstacles(this.canvas, this.assetManager);
     }
 
