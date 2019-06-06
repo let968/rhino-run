@@ -25,10 +25,12 @@ const config = {
             },
             {
                 test: /\.png$/,
-                use: ['file-loader'],
-                options: {
-                    publicPath: 'img'
-                }
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        publicPath: 'img'
+                    }
+                }],
             }
         ]
     },
