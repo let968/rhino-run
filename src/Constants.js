@@ -26,27 +26,27 @@ export const SKIER_STARTING_SPEED = 5;
 export const SKIER_DIAGONAL_SPEED_REDUCER = 1.4142;
 
 export const ASSETS = {
-    [SKIER_SPRITE]: 'img/skier_jump_5.png',
-    [SKIER_CRASH]: 'img/skier_crash.png',
-    [SKIER_LEFT]: 'img/skier_left.png',
-    [SKIER_LEFTDOWN]: 'img/skier_left_down.png',
-    [SKIER_DOWN]: 'img/skier_down.png',
-    [SKIER_JUMP]: 'img/skier_jump_1.png',
-    [SKIER_RIGHTDOWN]: 'img/skier_right_down.png',
-    [SKIER_RIGHT]: 'img/skier_right.png',
-    [TREE] : 'img/tree_1.png',
-    [TREE_CLUSTER] : 'img/tree_cluster.png',
-    [ROCK1] : 'img/rock_1.png',
-    [ROCK2] : 'img/rock_2.png',
-    [RHINO_DEFAULT] : 'img/rhino_default.png',
-    [RHINO_STRIDE_LEFT] : 'img/rhino_run_left.png',
-    [RHINO_STRIDE_RIGHT] : 'img/rhino_run_left_2.png',
-    [RHINO_LIFT] : 'img/rhino_lift.png',
-    [RHINO_LIFT_MOUTH_OPEN] : 'img/rhino_lift_mouth_open.png',
-    [RHINO_EAT_1] : 'img/rhino_lift_eat_1.png',
-    [RHINO_EAT_2] : 'img/rhino_lift_eat_2.png',
-    [RHINO_EAT_3] : 'img/rhino_lift_eat_3.png',
-    [RHINO_EAT_4] : 'img/rhino_lift_eat_4.png'
+    [SKIER_SPRITE]: '../img/skier_jump_5.png',
+    [SKIER_CRASH]: '../img/skier_crash.png',
+    [SKIER_LEFT]: '../img/skier_left.png',
+    [SKIER_LEFTDOWN]: '../img/skier_left_down.png',
+    [SKIER_DOWN]: '../img/skier_down.png',
+    [SKIER_JUMP]: '../img/skier_jump_1.png',
+    [SKIER_RIGHTDOWN]: '../img/skier_right_down.png',
+    [SKIER_RIGHT]: '../img/skier_right.png',
+    [TREE] : '../img/tree_1.png',
+    [TREE_CLUSTER] : '../img/tree_cluster.png',
+    [ROCK1] : '../img/rock_1.png',
+    [ROCK2] : '../img/rock_2.png',
+    [RHINO_DEFAULT] : '../img/rhino_default.png',
+    [RHINO_STRIDE_LEFT] : '../img/rhino_run_left.png',
+    [RHINO_STRIDE_RIGHT] : '../img/rhino_run_left_2.png',
+    [RHINO_LIFT] : '../img/rhino_lift.png',
+    [RHINO_LIFT_MOUTH_OPEN] : '../img/rhino_lift_mouth_open.png',
+    [RHINO_EAT_1] : '../img/rhino_lift_eat_1.png',
+    [RHINO_EAT_2] : '../img/rhino_lift_eat_2.png',
+    [RHINO_EAT_3] : '../img/rhino_lift_eat_3.png',
+    [RHINO_EAT_4] : '../img/rhino_lift_eat_4.png'
 };
 
 export const SKIER_DIRECTIONS = {
