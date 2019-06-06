@@ -94,7 +94,10 @@ export class Skier extends Entity {
             this.moveSkierLeft();
         } 
         else {
-            this.setDirection(this.direction - 1);
+            //Prevents turning while jumping resulting in a game crash
+            if( this.direction >= 1 ){
+                this.setDirection(this.direction - 1);
+            }
         }
     }
 
@@ -108,7 +111,10 @@ export class Skier extends Entity {
             this.moveSkierRight();
         } 
         else {
-            this.setDirection(this.direction + 1);
+            //Prevents turning while jumping resulting in a skiier crash
+            if( this.direction >= 1 ){
+                this.setDirection(this.direction + 1);
+            }       
         }
     }
 
