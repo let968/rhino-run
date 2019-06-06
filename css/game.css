@@ -28,6 +28,57 @@ html, body {
     animation-duration: 1s;
 }
 
+#overlay-2{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    color: white;
+    text-align: center;
+    background-color: rgba(0,0,0);
+    animation-name: fadeIn;
+    animation-duration: 1s;
+}
+
+#overlay-2 #container{
+    display: inline-block;
+    width: 75%;
+    margin: 100px auto;
+    position: relative;
+    background: rgba(255,255,255,.4);
+    font-size: 20px;
+}
+
+#overlay-2 #container table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#overlay-2 #container table th{
+    font-size: 30px;
+    padding: 10px;
+    border: solid thin rgba(255,255,255,.4);
+    background-color: cadetblue;
+}
+
+#overlay-2 #container table td{
+    width: 50%;
+    padding: 10px;
+    border: solid thin rgba(255,255,255,.4);
+}
+
+#overlay-2 #container table img{
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+#overlay-2 #container table td button{
+    font-size: 25px;
+    padding: 10px 20px;
+}
+
 #overlay h1{
     text-align: center;
 }

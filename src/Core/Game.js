@@ -14,9 +14,12 @@ export class Game{
         this.menu = new Menu();
         this.assetManager = new AssetManager();
         this.scoreDisplay = document.createElement('div');
-
-        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+        this.scoreDisplay.id = 'score';
+        this.scoreDisplay.innerHTML = 0;
+        
         document.body.appendChild(this.scoreDisplay);
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+
         this.state = 'B';
         
         this.menu.start.onclick = () => {
@@ -36,9 +39,6 @@ export class Game{
         this.rhino = null;
         this.obstacleManager = new ObstacleManager();
         this.obstacleManager.placeInitialObstacles();
-
-        this.scoreDisplay.id = 'score';
-        this.scoreDisplay.innerHTML = 0;
     }
 
     startGame(){
@@ -136,6 +136,8 @@ export class Game{
     }
 
     handleKeyDown(event) {
+        console.log(event.which);
+        
         switch(event.which) {
             case Constants.KEYS.LEFT:
                 this.skier.turnLeft();
@@ -156,6 +158,11 @@ export class Game{
             case Constants.KEYS.R:
                 if( this.state == 'P' || this.state == 'O' ){
                     this.startGame();
+                }
+                break;
+            case Constants.KEYS.T:
+                if( this.state != 'I' ){
+                    this.menu.tutorialPopup();
                 }
                 break;
             case Constants.KEYS.SPACE:

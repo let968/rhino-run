@@ -31,7 +31,7 @@ export const ASSETS = {
     [SKIER_LEFT]: '/img/skier_left.png',
     [SKIER_LEFTDOWN]: '/img/skier_left_down.png',
     [SKIER_DOWN]: '/img/skier_down.png',
-    [SKIER_JUMP]: '/img/skier_jump_1.png',
+    [SKIER_JUMP]: '/img/skier_jump_3.png',
     [SKIER_RIGHTDOWN]: '/img/skier_right_down.png',
     [SKIER_RIGHT]: '/img/skier_right.png',
     [TREE] : '/img/tree_1.png',
@@ -91,5 +91,6 @@ export const KEYS = {
     UP : 38,
     DOWN : 40,
     SPACE : 32,
-    R: 82
+    R: 82,
+    T: 84
 };

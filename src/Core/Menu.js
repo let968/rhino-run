@@ -18,14 +18,20 @@ export class Menu{
         this.start      = document.createElement('div');
         this.resume     = document.createElement('div');
         this.restart    = document.createElement('div');
+        this.tutorial   = document.createElement('div');
 
-        this.menu.append(this.start,this.resume,this.restart);
+        this.menu.append(this.start,this.resume,this.restart,this.tutorial);
         this.menu.id = 'menu';
         this.status.id = 'status';
 
         this.start.innerHTML    = '<div>Start</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.resume.innerHTML   = '<div>Resume</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.restart.innerHTML  = '<div>Restart</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ R ]</div>';
+        this.tutorial.innerHTML  = '<div>Tutorial</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ T ]</div>';
+
+        this.tutorial.onclick = () => {
+            this.tutorialPopup();
+        }
     }
 
     gameStatus(state){
@@ -112,5 +118,61 @@ export class Menu{
                 }, 300);
             }, 300);
         }, 300);
+    }
+
+    tutorialPopup(){
+        const overlay = document.createElement('div');
+
+        document.body.append(overlay);
+
+        overlay.id = 'overlay-2';
+        overlay.innerHTML = `
+            <div id='container'>
+                <table>
+                    <tr>
+                        <th colspan='2'>Tutorial</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Use the arrow keys to control your character. The up key causes your character to jump.
+                        </td>
+                        <td>
+                            <img src='/img/skier_down.png'>
+                            <img src='/img/skier_left_down.png'>
+                            <img src='/img/skier_right_down.png'>
+                            <img src='/img/skier_jump_3.png'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Be careful to avoid the trees and rocks while on your way down. (Hint. Rocks can be jumped over)
+                        </td>
+                        <td>
+                            <img src='/img/rock_1.png'>
+                            <img src='/img/rock_2.png'>
+                            <img src='/img/tree_1.png'>
+                            <img src='/img/tree_cluster.png'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            The Rhino will start chasing you once you reach 7,500 points.
+                        </td>
+                        <td>
+                            <img src='/img/rhino_default.png'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'>
+                            <button id='remove-tutorial'>Back</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        `;
+
+        document.getElementById('remove-tutorial').onclick = () => {
+            document.body.removeChild(overlay);
+        }
     }
 }
