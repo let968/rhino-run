@@ -1,3 +1,5 @@
+
+
 export class Canvas {
     x = 0;
     y = 0;
@@ -45,4 +47,8 @@ export class Canvas {
 
         this.ctx.drawImage(image, x, y, width, height);
     }
+
+    
+
+    
 }

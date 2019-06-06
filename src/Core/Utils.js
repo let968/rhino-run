@@ -11,6 +11,10 @@ export function intersectTwoRects(rect1, rect2) {
         rect2.bottom < rect1.top);
 }
 
+export function intersectTwoEntities(lead,follow){
+    return follow.y >= lead.y;
+}
+
 export function jumpingOverRock(midAir,obstacleName){
     return midAir && obstacleName.includes('rock');
 }
