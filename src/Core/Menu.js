@@ -1,4 +1,5 @@
 import { RHINO_END_GAME, SKIER_SPRITE, ASSETS } from '../Constants';
+import { saveScore } from "./Utils";
 
 export class Menu{
     action = null;
@@ -27,22 +28,48 @@ export class Menu{
         this.start.innerHTML    = '<div>Start</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.resume.innerHTML   = '<div>Resume</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.restart.innerHTML  = '<div>Restart</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ R ]</div>';
-        this.tutorial.innerHTML  = '<div>Tutorial</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ T ]</div>';
+        this.tutorial.innerHTML = '<div>Tutorial</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ T ]</div>';
 
         this.tutorial.onclick = () => {
             this.tutorialPopup();
         }
     }
 
-    gameStatus(state){
+    gameStatus(state,stats=0){
         while(this.status.firstChild){
             this.status.removeChild(this.status.firstChild);
         }
 
         const 
+            player = document.createElement('div'),
             title = document.createElement('h1'),
             img = document.createElement('img'),
-            score = document.createElement('h2');
+            score = document.createElement('h2'),
+            statsContainer = document.createElement('div');
+
+        player.innerHTML   = '<div style="margin-bottom: 10px">Name: <input name="player-name" maxLength="25" value="Skier"></div>';
+
+        statsContainer.innerHTML = `
+            <table style='margin: 0 auto;border-top:solid 2px rgba(255,255,255,.5);color: rgba(255,255,255,.7)'>
+                <tr>
+                    <th colspan='2'>
+                        <h3>Statistics</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <td align='right' style='padding-right: 5px;font-weight: bold'>Jumps:</td>
+                    <td>${ stats.jumps }</td>
+                </tr>
+                <tr>
+                    <td align='right' style='padding-right: 5px;font-weight: bold'>Distance traveled left:</td>
+                    <td>${ stats.leftTurns }</td>
+                </tr>
+                <tr>
+                    <td align='right' style='padding-right: 5px;font-weight: bold'>Distance traveled right:</td>
+                    <td>${ stats.rightTurns }</td>
+                </tr>
+            </table>
+        `;
 
 
         switch (state) {
@@ -51,7 +78,7 @@ export class Menu{
                 this.resume.style.display  = 'none';
                 this.restart.style.display = 'none';
                 img.src = ASSETS[SKIER_SPRITE];
-                title.innerHTML = '<span style="font-size: 1.5em;text-decoration: underline">RHINO RUN</span>';
+                title.innerHTML = '<div data-text="RHINO RUN" class="game-over"><span>RHINO RUN</span></div>';
                 score.innerText = '';
                 break;
             case 'P':
@@ -60,7 +87,8 @@ export class Menu{
                 this.restart.style.display = 'block';
                 img.src = ASSETS[SKIER_SPRITE];
                 title.innerText = 'Paused';
-                score.innerText = `Score: ${ this.score }`;
+                score.innerText = `Score: ${ stats.score }`;
+                this.status.append(statsContainer);
                 break;
             case 'O':
                 this.start.style.display   = 'none';
@@ -68,7 +96,8 @@ export class Menu{
                 this.restart.style.display = 'block';
                 img.src = ASSETS[RHINO_END_GAME[0]];
                 title.innerText = 'Game Over';
-                score.innerText = `Score: ${ this.score }`;
+                score.innerText = `Score: ${ stats.score }`;
+                this.status.append(statsContainer);
     
                 setTimeout(() => {        
                     this.eatSkier(img);
@@ -78,14 +107,18 @@ export class Menu{
                 break;
         }
 
-        this.status.append(title,img,score);
+        this.status.prepend(title,img,score,player);
     }
 
-    addOverlay(state){
+    leaderboard(){
+
+    }
+
+    addOverlay(state,stats=0){
         this.removeOverlay();
         document.body.append(this.background);
 
-        this.gameStatus(state);
+        this.gameStatus(state,stats);
         this.background.append(this.status, this.menu);
     }
 

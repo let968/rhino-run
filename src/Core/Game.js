@@ -51,7 +51,7 @@ export class Game{
 
         //Used to load obstacles in before game starts
         this.run();
-        this.updateScore(0);
+        this.skier.stats.score = 0;
 
         setTimeout(() => {
             this.state = 'I';
@@ -63,7 +63,7 @@ export class Game{
 
     pauseGame(){
         this.state = 'P';
-        this.menu.addOverlay(this.state);
+        this.menu.addOverlay(this.state,this.skier.stats);
     }
 
     resumeGame(){
@@ -97,7 +97,7 @@ export class Game{
         this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
         this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
         
-        if( !this.rhino && this.menu.score > 7500 ){
+        if( !this.rhino && this.skier.stats.score > 7500 ){
             this.rhino = new Rhino(skierPosition.x, skierPosition.y - 500);
             this.rhino.speedBoost = 1.25;
         } else if( this.rhino ){
@@ -111,7 +111,9 @@ export class Game{
         //if rhino reached player end the game
         if( this.rhino && intersectTwoEntities(this.skier.getPosition(),this.rhino.getPosition()) ) {
             this.state = 'O';
-            this.menu.addOverlay(this.state);
+            this.menu.addOverlay(this.state,this.skier.stats);
+            console.log(this.skier.stats);
+            
         }
 
     }
@@ -181,9 +183,8 @@ export class Game{
         }
     }
 
-    updateScore(distance){
-        this.menu.score = Math.round(distance);
-        this.scoreDisplay.innerText = this.menu.score;
+    updateScore(){
+        this.scoreDisplay.innerText = this.skier.stats.score;
     }
     
 }

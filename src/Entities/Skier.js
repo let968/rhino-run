@@ -8,6 +8,12 @@ export class Skier extends Entity {
     direction = Constants.SKIER_DIRECTIONS.DOWN;
     speed = Constants.SKIER_STARTING_SPEED;
     inAir = 0;
+    stats = {
+        score: 0,
+        leftTurns: 0,
+        rightTurns: 0,
+        jumps: 0,
+    };
 
     constructor(x, y) {
         super(x, y);
@@ -42,15 +48,20 @@ export class Skier extends Entity {
     }
 
     moveSkierLeftDown() {
+        this.stats.leftTurns++;
+        this.stats.score += Math.round(this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER);
         this.x -= this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
         this.y += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
     }
 
     moveSkierDown() {
+        this.stats.score += this.speed;
         this.y += this.speed;
     }
 
     moveSkierRightDown() {
+        this.stats.rightTurns++;
+        this.stats.score += Math.round(this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER);
         this.x += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
         this.y += this.speed / Constants.SKIER_DIAGONAL_SPEED_REDUCER;
     }
@@ -65,6 +76,7 @@ export class Skier extends Entity {
             return;
         }
 
+        this.stats.jumps++;
         this.inAir = 1;
         this.direction = Constants.SKIER_DIRECTIONS.JUMP;
         this.updateAsset();

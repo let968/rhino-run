@@ -32,3 +32,23 @@ export class Rect {
         this.bottom = bottom;
     }
 }
+
+export function saveScore(form_data){
+    const xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(){
+        if( xhr.readyState == XMLHttpRequest.DONE ){
+            if( xhr.status == 200 ){
+                console.log(xhr.responseText);
+            } else if(xhr.status == 400){
+                alert('An error has occured');
+            } else {
+                alert('Unkown error');
+            }
+        }
+    };
+
+    xhr.open('POST','api.letourneau.io/api/score', true);
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.send( JSON.stringify(form_data) );
+}
