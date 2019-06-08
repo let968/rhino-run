@@ -48,7 +48,7 @@ export function saveScore(form_data){
         }
     };
 
-    xhr.open('POST','api.letourneau.io/api/score', true);
+    xhr.open('POST','http://api.letourneau.io/api/score', true);
     xhr.setRequestHeader('Content-Type','application/json');
     xhr.send( JSON.stringify(form_data) );
 }

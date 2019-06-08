@@ -84,7 +84,7 @@ export class Skier extends Entity {
 
         setTimeout(() => {
             this.endJump();
-        }, 1000);
+        }, 500);
     }
 
     endJump(){

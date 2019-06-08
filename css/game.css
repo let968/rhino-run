@@ -177,6 +177,15 @@ html, body {
     transition-duration: .3s;
 }
 
+input{
+    background: transparent;
+    border: none;
+    border-bottom: solid 2px white;
+    color: white;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
 @keyframes fadeIn{
     from { opacity: 0 }
     to { opacity: 1 }

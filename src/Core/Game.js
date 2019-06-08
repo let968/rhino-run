@@ -81,9 +81,12 @@ export class Game{
             requestAnimationFrame(this.run.bind(this));
         }
 
-        this.canvas.clearCanvas();    
-        this.updateGameWindow();
-        this.drawGameWindow();
+        if( this.state != 'O' ){
+            this.canvas.clearCanvas();    
+            this.updateGameWindow();
+            this.drawGameWindow();
+        }
+        
     }
 
     updateGameWindow() {
@@ -97,7 +100,7 @@ export class Game{
         this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
         this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
         
-        if( !this.rhino && this.skier.stats.score > 7500 ){
+        if( !this.rhino && this.skier.stats.score > 5000 ){
             this.rhino = new Rhino(skierPosition.x, skierPosition.y - 500);
             this.rhino.speedBoost = 1.25;
         } else if( this.rhino ){
@@ -111,9 +114,7 @@ export class Game{
         //if rhino reached player end the game
         if( this.rhino && intersectTwoEntities(this.skier.getPosition(),this.rhino.getPosition()) ) {
             this.state = 'O';
-            this.menu.addOverlay(this.state,this.skier.stats);
-            console.log(this.skier.stats);
-            
+            this.menu.addOverlay(this.state,this.skier.stats);            
         }
 
     }
@@ -137,7 +138,12 @@ export class Game{
         this.gameWindow = new Rect(left, top, left + Constants.GAME_WIDTH, top + Constants.GAME_HEIGHT);
     }
 
-    handleKeyDown(event) {        
+    handleKeyDown(event) {
+        
+        if( event.srcElement && event.srcElement.nodeName == 'INPUT' ){
+            return;
+        }
+              
         switch(event.which) {
             case Constants.KEYS.LEFT:
                 this.skier.turnLeft();

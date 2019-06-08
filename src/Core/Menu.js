@@ -47,10 +47,12 @@ export class Menu{
             score = document.createElement('h2'),
             statsContainer = document.createElement('div');
 
-        player.innerHTML   = '<div style="margin-bottom: 10px">Name: <input name="player-name" maxLength="25" value="Skier"></div>';
+        this.status.prepend(title,img,score,player);
+
+        player.innerHTML   = '<div style="margin-bottom: 10px">Initials: <input id="player-initials" maxLength="3" minLength="3" value="SKI"></div>';
 
         statsContainer.innerHTML = `
-            <table style='margin: 0 auto;border-top:solid 2px rgba(255,255,255,.5);color: rgba(255,255,255,.7)'>
+            <table style='margin: 0 auto;color: rgba(255,255,255,.7)'>
                 <tr>
                     <th colspan='2'>
                         <h3>Statistics</h3>
@@ -98,7 +100,12 @@ export class Menu{
                 title.innerText = 'Game Over';
                 score.innerText = `Score: ${ stats.score }`;
                 this.status.append(statsContainer);
-    
+                
+                let initials = player.getElementsByTagName('input')[0].value;
+                stats.username = initials;
+                
+                saveScore(stats);
+                
                 setTimeout(() => {        
                     this.eatSkier(img);
                 }, 2000);
@@ -106,8 +113,6 @@ export class Menu{
             default:
                 break;
         }
-
-        this.status.prepend(title,img,score,player);
     }
 
     leaderboard(){
@@ -154,6 +159,10 @@ export class Menu{
     }
 
     tutorialPopup(){
+        if( document.body.querySelector("#overlay-2") != null ){
+            return;
+        }
+
         const overlay = document.createElement('div');
 
         document.body.append(overlay);
@@ -189,7 +198,7 @@ export class Menu{
                     </tr>
                     <tr>
                         <td>
-                            The Rhino will start chasing you once you reach 7,500 points.
+                            The Rhino will start chasing you once you reach 5,000 points.
                         </td>
                         <td>
                             <img src='/img/rhino_default.png'>
