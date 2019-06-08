@@ -1,9 +1,10 @@
 import { RHINO_END_GAME, SKIER_SPRITE, ASSETS } from '../Constants';
-import { saveScore } from "./Utils";
+import { saveScore, getLeaderboard } from "./Utils";
 
 export class Menu{
     action = null;
     score = 0;
+    username = 'AAA';
 
     constructor(){
         this.menuInit();
@@ -14,12 +15,24 @@ export class Menu{
         this.background     = document.createElement("div");
         this.background.id  = 'overlay';
 
-        this.menu       = document.createElement('div');
-        this.status     = document.createElement('div');
-        this.start      = document.createElement('div');
-        this.resume     = document.createElement('div');
-        this.restart    = document.createElement('div');
-        this.tutorial   = document.createElement('div');
+        this.menu        = document.createElement('div');
+        this.status      = document.createElement('div');
+        this.start       = document.createElement('div');
+        this.resume      = document.createElement('div');
+        this.restart     = document.createElement('div');
+        this.tutorial    = document.createElement('div');
+        this.leaderboard = document.createElement('div');
+        this.flex        = document.createElement('div');
+
+        this.flex.style.display = 'flex';
+        this.flex.style.justifyContent = 'center';
+        this.flex.append(this.menu,this.leaderboard);
+
+        this.leaderboard.id = 'leaderboard';
+        this.leaderboard.innerHTML = `
+            <h1>Leaderboard</h1>
+            <div class='_target'></div>
+        `;
 
         this.menu.append(this.start,this.resume,this.restart,this.tutorial);
         this.menu.id = 'menu';
@@ -49,8 +62,6 @@ export class Menu{
 
         this.status.prepend(title,img,score,player);
 
-        player.innerHTML   = '<div style="margin-bottom: 10px">Initials: <input id="player-initials" maxLength="3" minLength="3" value="SKI"></div>';
-
         statsContainer.innerHTML = `
             <table style='margin: 0 auto;color: rgba(255,255,255,.7)'>
                 <tr>
@@ -73,49 +84,50 @@ export class Menu{
             </table>
         `;
 
+        getLeaderboard(this.leaderboard.querySelector('._target')).then(()=> {
+            switch (state) {
+                case 'B':
+                    this.start.style.display   = 'block';
+                    this.resume.style.display  = 'none';
+                    this.restart.style.display = 'none';
+                    img.src = ASSETS[SKIER_SPRITE];
+                    title.innerHTML = '<div data-text="RHINO RUN" class="game-over"><span>RHINO RUN</span></div>';
+                    score.innerText = '';
+                    break;
+                case 'P':
+                    this.start.style.display   = 'none';
+                    this.resume.style.display  = 'block';
+                    this.restart.style.display = 'block';
+                    img.src = ASSETS[SKIER_SPRITE];
+                    title.innerText = 'Paused';
+                    score.innerText = `Score: ${ stats.score }`;
+                    this.status.append(statsContainer);
+                    break;
+                case 'O':
+                    saveScore(stats).then( result => {
+                        getLeaderboard(this.leaderboard.querySelector('._target')).then(() => {
+                            this.findLeaderboardId(result.insertedId);
+                        });
+                        
+                        this.start.style.display   = 'none';
+                        this.resume.style.display  = 'none';
+                        this.restart.style.display = 'block';
+                        img.src = ASSETS[RHINO_END_GAME[0]];
+                        title.innerText = 'Game Over';
+                        score.innerText = `Score: ${ stats.score }`;
+                        this.status.append(statsContainer);
+                        
+                        setTimeout(() => {        
+                            this.eatSkier(img);
+                        }, 2000);
+    
+                    });
+                    break;
+                default:
+                    break;
+            }
 
-        switch (state) {
-            case 'B':
-                this.start.style.display   = 'block';
-                this.resume.style.display  = 'none';
-                this.restart.style.display = 'none';
-                img.src = ASSETS[SKIER_SPRITE];
-                title.innerHTML = '<div data-text="RHINO RUN" class="game-over"><span>RHINO RUN</span></div>';
-                score.innerText = '';
-                break;
-            case 'P':
-                this.start.style.display   = 'none';
-                this.resume.style.display  = 'block';
-                this.restart.style.display = 'block';
-                img.src = ASSETS[SKIER_SPRITE];
-                title.innerText = 'Paused';
-                score.innerText = `Score: ${ stats.score }`;
-                this.status.append(statsContainer);
-                break;
-            case 'O':
-                this.start.style.display   = 'none';
-                this.resume.style.display  = 'none';
-                this.restart.style.display = 'block';
-                img.src = ASSETS[RHINO_END_GAME[0]];
-                title.innerText = 'Game Over';
-                score.innerText = `Score: ${ stats.score }`;
-                this.status.append(statsContainer);
-                
-                let initials = player.getElementsByTagName('input')[0].value;
-                stats.username = initials;
-                
-                saveScore(stats);
-                
-                setTimeout(() => {        
-                    this.eatSkier(img);
-                }, 2000);
-                break;
-            default:
-                break;
-        }
-    }
-
-    leaderboard(){
+        }); 
 
     }
 
@@ -124,7 +136,7 @@ export class Menu{
         document.body.append(this.background);
 
         this.gameStatus(state,stats);
-        this.background.append(this.status, this.menu);
+        this.background.append(this.status, this.flex);
     }
 
     removeOverlay(){
@@ -216,5 +228,41 @@ export class Menu{
         document.getElementById('remove-tutorial').onclick = () => {
             document.body.removeChild(overlay);
         }
+    }
+
+    findLeaderboardId($id){
+        console.log($id);
+        
+        const leaderElement = this.leaderboard.querySelector(`[id='${ $id }']`);
+        const firstChild = leaderElement.querySelector('div');
+
+        let leaderData = JSON.parse(leaderElement.getAttribute("db-data"));
+        
+
+        firstChild.innerHTML = `
+            <div>
+                ${ firstChild.innerText.split(' ')[0] }
+                <input id='current-score-name' value='${ leaderData.username }'>
+                <button id='update-score-button'>Update</button>
+            </div>
+        `
+        
+        document.getElementById('update-score-button').onclick = () => {
+            const newName = document.getElementById('current-score-name').value;
+
+            if( newName.length > 0 ){
+                leaderData.username = newName;
+    
+                saveScore(leaderData).then(result => {
+                    if( result.status ){
+                        getLeaderboard(this.leaderboard.querySelector('._target'));
+                    }
+                });
+            } else {
+                alert('Name cannot be blank');
+            }
+            
+        }
+        
     }
 }

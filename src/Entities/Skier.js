@@ -9,6 +9,7 @@ export class Skier extends Entity {
     speed = Constants.SKIER_STARTING_SPEED;
     inAir = 0;
     stats = {
+        username: 'AAA',
         score: 0,
         leftTurns: 0,
         rightTurns: 0,

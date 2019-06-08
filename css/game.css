@@ -155,15 +155,15 @@ html, body {
 #overlay #menu{
     display: inline-block;
     width: 300px;
-    margin: 50px auto;
+    margin: 50px 50px 50px 0;
     position: relative;
-    background: rgba(255,255,255,.4);
     font-size: 50px;
 }
 
 #overlay #menu > div{
     padding: 5px;
     border-bottom: solid thin rgba(255,255,255,.3);
+    background: rgba(255,255,255,.4);
     cursor: pointer;
 }
 
@@ -177,13 +177,42 @@ html, body {
     transition-duration: .3s;
 }
 
+#leaderboard{
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 300px;
+    border: solid thin grey;
+    border-radius: 5px;
+    background: lightgrey;
+}
+
+#leaderboard h1{
+    margin: 0;
+    padding: 10px;
+    color: lightgrey;
+    background-color: grey;
+}
+
+#leaderboard ._target {
+    height: 300px;
+    overflow: auto;
+}
+
+#leaderboard ._target .leader-row{
+    color: grey;
+    padding: 5px 10px;
+    border-bottom: solid thin darkgrey
+}
+
+#leaderboard ._target .leader-row > div:first-child{
+    margin-right: auto;
+}
+
 input{
-    background: transparent;
-    border: none;
-    border-bottom: solid 2px white;
+    background: black;
     color: white;
-    font-size: 20px;
-    margin-left: 5px;
+    border:solid thin grey;
+    width: 75px;
 }
 
 @keyframes fadeIn{
