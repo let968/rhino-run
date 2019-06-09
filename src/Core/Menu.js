@@ -2,9 +2,6 @@ import { RHINO_END_GAME, SKIER_SPRITE, ASSETS } from '../Constants';
 import { saveScore, getLeaderboard } from "./Utils";
 
 export class Menu{
-    action = null;
-    score = 0;
-
     constructor(){
         this.menuInit();
         this.addOverlay('B');

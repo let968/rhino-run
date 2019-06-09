@@ -91,3 +91,25 @@ how creative candidates get with this.
 * Write more unit tests for your code
 
 We are looking forward to see what you come up with!
+
+
+~~~~~ My Comments ~~~~~~
+
+  ** Bug fixes **
+    - Fixed bug that caused game crash when player tried to move left after crashing into an obstacle
+    - Fixed ability to move right when player tried to move right after crashing into an obstacle
+    - Fixed bug that crashed game when turning while in the air
+
+  ** Updates **
+    - Added jump ability to player
+    - Added ability to jump over rocks
+  
+  ** New Features **
+    - Startup, pause, and end game menu added to game
+    - Score tracker for players
+    - Rhino that chases the player after a certain amount of points are reached
+    - Stats were added for each run
+    - Created an api back-end using node and mongodb to store users scores
+    - Leaderboard for high scores added
+    - Players can enter their initials on the leaderboard after their run
+    - Increased difficulty the further a player goes

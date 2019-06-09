@@ -96,6 +96,7 @@ export class Skier extends Entity {
     }
 
     turnLeft() {
+
         if(this.direction === Constants.SKIER_DIRECTIONS.LEFT) {
             this.moveSkierLeft();
         }

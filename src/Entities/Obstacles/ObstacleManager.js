@@ -114,13 +114,15 @@ export class ObstacleManager {
         }
     }
 
+    /*
+        TODO: add reason why this was done like this
+    */
     scaleDifficulty(score){
         let newDifficulty = Math.floor(score / 10000);
 
         if( NEW_OBSTACLE_CHANCE > 3 && DIFFICULTY != newDifficulty && NEW_OBSTACLE_CHANCE - 1 >= 3 ){
             DIFFICULTY++;
             NEW_OBSTACLE_CHANCE--;
-            console.log(DIFFICULTY,score,NEW_OBSTACLE_CHANCE);
         }
     }
 }
