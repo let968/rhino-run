@@ -13,7 +13,7 @@ export class Skier extends Entity {
         score: 0,
         leftTurns: 0,
         rightTurns: 0,
-        jumps: 0,
+        distanceInAir: 0,
     };
 
     constructor(x, y) {
@@ -77,7 +77,6 @@ export class Skier extends Entity {
             return;
         }
 
-        this.stats.jumps++;
         this.inAir = 1;
         this.direction = Constants.SKIER_DIRECTIONS.JUMP;
         this.updateAsset();
@@ -160,13 +159,18 @@ export class Skier extends Entity {
             );
 
             const intersection = intersectTwoRects(skierBounds, obstacleBounds);
+            const clearedRock = jumpingOverRock(this.inAir,obstacleName);
 
-            return intersection && !jumpingOverRock(this.inAir,obstacleName);
+            return intersection && !clearedRock;
         });
 
         if(collision) {
             this.inAir = 0;
             this.setDirection(Constants.SKIER_DIRECTIONS.CRASH);
+        }
+
+        if( this.inAir ){
+            this.stats.distanceInAir++;
         }
     };
 }

@@ -5,7 +5,10 @@ import { Obstacle } from "./Obstacle";
 const DISTANCE_BETWEEN_OBSTACLES = 50;
 const STARTING_OBSTACLE_GAP = 100;
 const STARTING_OBSTACLE_REDUCER = 300;
-const NEW_OBSTACLE_CHANCE = 8;
+
+//cnaged to allow increasing difficulty
+let NEW_OBSTACLE_CHANCE = 8; //Minimum is 3
+let DIFFICULTY = 0;
 
 export class ObstacleManager {
     obstacles = [];
@@ -25,6 +28,9 @@ export class ObstacleManager {
 
     placeInitialObstacles() {
         const numberObstacles = Math.ceil((Constants.GAME_WIDTH / STARTING_OBSTACLE_REDUCER) * (Constants.GAME_HEIGHT / STARTING_OBSTACLE_REDUCER));
+
+        NEW_OBSTACLE_CHANCE = 8;
+        DIFFICULTY = 0;
 
         const minX = -Constants.GAME_WIDTH / 2;
         const maxX = Constants.GAME_WIDTH / 2;
@@ -105,6 +111,16 @@ export class ObstacleManager {
                 x: x,
                 y: y
             };
+        }
+    }
+
+    scaleDifficulty(score){
+        let newDifficulty = Math.floor(score / 10000);
+
+        if( NEW_OBSTACLE_CHANCE > 3 && DIFFICULTY != newDifficulty && NEW_OBSTACLE_CHANCE - 1 >= 3 ){
+            DIFFICULTY++;
+            NEW_OBSTACLE_CHANCE--;
+            console.log(DIFFICULTY,score,NEW_OBSTACLE_CHANCE);
         }
     }
 }

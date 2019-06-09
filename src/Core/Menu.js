@@ -4,7 +4,6 @@ import { saveScore, getLeaderboard } from "./Utils";
 export class Menu{
     action = null;
     score = 0;
-    username = 'AAA';
 
     constructor(){
         this.menuInit();
@@ -70,8 +69,8 @@ export class Menu{
                     </th>
                 </tr>
                 <tr>
-                    <td align='right' style='padding-right: 5px;font-weight: bold'>Jumps:</td>
-                    <td>${ stats.jumps }</td>
+                    <td align='right' style='padding-right: 5px;font-weight: bold'>Distance traveled in air:</td>
+                    <td>${ stats.distanceInAir }</td>
                 </tr>
                 <tr>
                     <td align='right' style='padding-right: 5px;font-weight: bold'>Distance traveled left:</td>
@@ -230,9 +229,7 @@ export class Menu{
         }
     }
 
-    findLeaderboardId($id){
-        console.log($id);
-        
+    findLeaderboardId($id){        
         const leaderElement = this.leaderboard.querySelector(`[id='${ $id }']`);
         const firstChild = leaderElement.querySelector('div');
 

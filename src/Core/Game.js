@@ -26,7 +26,7 @@ export class Game{
             this.startGame();
         }
         this.menu.resume.onclick = () => {
-            this.resumeGame()
+            this.resumeGame();
         }
         this.menu.restart.onclick = () => {
             this.startGame();
@@ -39,6 +39,7 @@ export class Game{
         this.rhino = null;
         this.obstacleManager = new ObstacleManager();
         this.obstacleManager.placeInitialObstacles();
+        this.menu.removeOverlay();
     }
 
     startGame(){
@@ -46,10 +47,11 @@ export class Game{
             document.body.removeChild(document.getElementById("skiCanvas"));
         }
 
-        this.menu.removeOverlay();
+        
         this.init();
 
         //Used to load obstacles in before game starts
+        this.state = 'S';
         this.run();
         this.skier.stats.score = 0;
 
@@ -117,6 +119,8 @@ export class Game{
             this.menu.addOverlay(this.state,this.skier.stats);            
         }
 
+        this.obstacleManager.scaleDifficulty(this.skier.stats.score);
+
     }
 
     drawGameWindow() {
@@ -128,7 +132,7 @@ export class Game{
         }
 
         this.obstacleManager.drawObstacles(this.canvas, this.assetManager);
-    }
+       }
 
     calculateGameWindow() {
         const skierPosition = this.skier.getPosition();
