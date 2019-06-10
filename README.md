@@ -98,15 +98,18 @@ We are looking forward to see what you come up with!
   Web Address: https://rhino-run.letourneau.io
 
   **Bug fixes**
+  
     * Fixed bug that caused game crash when player tried to move left after crashing into an obstacle (Entities/Skier.js)
     * Fixed ability to move right when player tried to move right after crashing into an obstacle (Entities/Skier.js)
     * Fixed bug that crashed game when turning while in the air (Entities/Skier.js)
 
   **Updates**
+  
     * Added jump ability to player (Entities/Skier.js)
     * Added ability to jump over rocks (Entities/Skier.js)
   
   **New Features**
+  
     * Startup, pause, and end game menu added to game (Core/Menu.js)
     * Tutorial to help player understand the gameplay (Core/Menu.js)
     * Score tracker for players (Core/Menu.js | Entities/Skier.js)
