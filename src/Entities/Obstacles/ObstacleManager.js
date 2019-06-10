@@ -7,8 +7,8 @@ const STARTING_OBSTACLE_GAP = 100;
 const STARTING_OBSTACLE_REDUCER = 300;
 
 //changed from const to allow difficutly change
-let NEW_OBSTACLE_CHANCE = 8; //Minimum is 3
-let DIFFICULTY = 0;
+export let NEW_OBSTACLE_CHANCE = 8; //Minimum is 3
+export let DIFFICULTY = 0;
 
 export class ObstacleManager {
     obstacles = [];
