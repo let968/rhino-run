@@ -1,3 +1,11 @@
+/*
+
+    NF4 - Rhino that chases the player after a certain amount of points are reached
+
+*/
+
+
+
 import * as Constants from "../Constants";
 import { AssetManager } from "./AssetManager";
 import { Canvas } from './Canvas';
@@ -35,6 +43,10 @@ export class Game{
     init() {
         this.canvas = new Canvas(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
         this.skier = new Skier(0, 0);
+        /*
+            -- NF4 --
+            Rhino not initialized. No sense wasting resources to track the rhino before he shows up
+         */
         this.rhino = null;
         this.obstacleManager = new ObstacleManager();
         this.obstacleManager.placeInitialObstacles();
@@ -49,7 +61,7 @@ export class Game{
         
         this.init();
 
-        //Used to load obstacles in before game starts
+        //Used to load obstacles in before game starts so the player is not sent right into a moving game
         this.state = 'S';
         this.run();
         this.skier.stats.score = 0;
@@ -104,9 +116,11 @@ export class Game{
         this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
         
         /*
-            Rhino is called in after the user has traveled 5000 pixels and 
-            comes in from the top of the screen until he gets to 150 pixels away from the player
-        */
+            -- NF4 --
+            Initialize the rhino once and have him catch up to the player until
+            he gets within 150 pixels. Animation looks a lot smoother if he comes in at the top
+            of the screen
+         */
         if( !this.rhino && this.skier.stats.score > 5000 ){
             this.rhino = new Rhino(skierPosition.x, skierPosition.y - 500);
             this.rhino.speedBoost = 1.25;

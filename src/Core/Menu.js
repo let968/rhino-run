@@ -1,6 +1,24 @@
+/*
+
+    NF1 - Startup, pause, and end game menu added to game
+    NF2 - Tutorial to help player understand the gameplay
+    NF3 - Score tracker for players
+    NF5 - Stats were added for each run
+    NF7 - Leaderboard for high scores added
+    NF8 - Players can enter their initials on the leaderboard after their run
+*/
+
+
+
+
 import { RHINO_END_GAME, SKIER_SPRITE, ASSETS } from '../Constants';
 import { saveScore, getLeaderboard } from "./Utils";
 
+/*
+    -- NF1 --
+    Gave the game a menu to give it a more arcade-like feel complete with an initials leaderboard for a true arcade experience. Allows players
+    to pause and restart/resume the game.
+*/
 export class Menu{
     constructor(){
         this.menuInit();
@@ -19,7 +37,7 @@ export class Menu{
         this.start       = document.createElement('div');
         this.resume      = document.createElement('div');
         this.restart     = document.createElement('div');
-        this.tutorial    = document.createElement('div');
+        this.tutorial    = document.createElement('div'); // NF2
 
 
         this.leaderboard = document.createElement('div');
@@ -28,6 +46,11 @@ export class Menu{
         this.flex.style.display = 'flex';
         this.flex.style.justifyContent = 'center';
         this.flex.append(this.menu,this.leaderboard);
+
+        /*
+            -- NF7 --
+            Leaderboard added to give players a goal to achieve. 
+         */
 
         this.leaderboard.id = 'leaderboard';
         this.leaderboard.innerHTML = `
@@ -42,8 +65,9 @@ export class Menu{
         this.start.innerHTML    = '<div>Start</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.resume.innerHTML   = '<div>Resume</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ Spacebar ]</div>';
         this.restart.innerHTML  = '<div>Restart</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ R ]</div>';
-        this.tutorial.innerHTML = '<div>Tutorial</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ T ]</div>';
+        this.tutorial.innerHTML = '<div>Tutorial</div><div style="font-size:.30em;color:rgba(255,255,255,.3)">[ T ]</div>'; // NF2
 
+        // NF2
         this.tutorial.onclick = () => {
             this.tutorialPopup();
         }
@@ -63,6 +87,11 @@ export class Menu{
 
         this.status.prepend(title,img,score,player);
 
+        /*
+            -- NF5 --
+            PLayer can view stats about their run like how far they traveled in air/left/right.
+            These stats are saved to database but not displayed on the leaderbaord. Stats are tracked in the Skier class
+         */
         statsContainer.innerHTML = `
             <table style='margin: 0 auto;color: rgba(255,255,255,.7)'>
                 <tr>
@@ -86,7 +115,11 @@ export class Menu{
         `;
 
         getLeaderboard(this.leaderboard.querySelector('._target')).then(()=> {
-            this.findLeaderboardId('1234');
+            /*
+                -- NF3 --
+                Score can be seen from the pause screen so players can view how their score
+                stacks up with the leaderboard scores. Score is tracked in the Skier class
+              */
             switch (state) {
                 case 'B':
                     this.start.style.display   = 'block';
@@ -102,7 +135,7 @@ export class Menu{
                     this.restart.style.display = 'block';
                     img.src = ASSETS[SKIER_SPRITE];
                     title.innerText = 'Paused';
-                    score.innerText = `Score: ${ stats.score }`;
+                    score.innerText = `Score: ${ stats.score }`; // NF3
                     this.status.append(statsContainer);
                     break;
                 case 'O':
@@ -116,9 +149,10 @@ export class Menu{
                         this.restart.style.display = 'block';
                         img.src = ASSETS[RHINO_END_GAME[0]];
                         title.innerText = 'Game Over';
-                        score.innerText = `Score: ${ stats.score }`;
+                        score.innerText = `Score: ${ stats.score }`; // NF3
                         this.status.append(statsContainer);
                         
+                        // Animation of the Rhino eating the Skier. Happens when the skier is caught by the Rhino
                         setTimeout(() => {        
                             this.eatSkier(img);
                         }, 2000);
@@ -172,6 +206,10 @@ export class Menu{
         }, 300);
     }
 
+    /*
+        -- NF2 --
+        Created a tutorial to give players an insight on how the game is suuposed to be played
+    */
     tutorialPopup(){
         if( document.body.querySelector("#overlay-2") != null ){
             return;
@@ -232,6 +270,11 @@ export class Menu{
         }
     }
 
+    /*
+        -- NF8 --
+        Way to find the submitted row and allow players to enter their initials.
+        Much like an arcade game prompts a plyer when the reach the leaderbaord
+    */
     findLeaderboardId($id){
         if( this.leaderboard.querySelector(`[id='${ $id }']`) == null ){
             return;

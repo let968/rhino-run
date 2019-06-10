@@ -1,3 +1,12 @@
+/*
+
+    NF9 - Increased difficulty the further a player goes
+
+*/
+
+
+
+
 import * as Constants from '../../Constants';
 import { randomInt } from '../../Core/Utils';
 import { Obstacle } from "./Obstacle";
@@ -6,8 +15,12 @@ const DISTANCE_BETWEEN_OBSTACLES = 50;
 const STARTING_OBSTACLE_GAP = 100;
 const STARTING_OBSTACLE_REDUCER = 300;
 
-//changed from const to allow difficutly change
-export let NEW_OBSTACLE_CHANCE = 8; //Minimum is 3
+/*
+    -- NF9 --
+    Changed from const to allow difficutly change.
+    Minimum value of NEW_OBSTACLE_CHANCE is 3. Anything lower is nearly impossible to navigate the skier.
+*/
+export let NEW_OBSTACLE_CHANCE = 8;
 export let DIFFICULTY = 0;
 
 export class ObstacleManager {
@@ -117,6 +130,7 @@ export class ObstacleManager {
     }
 
     /*
+        -- NF9 --
         Scaling increases every 10,000 pixels travelled.
         Set as is to prevent coding with a switch statement or a lot of if else statements
     */

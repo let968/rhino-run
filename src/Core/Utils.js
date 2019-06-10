@@ -1,3 +1,8 @@
+/*
+    U2 - Added ability to jump over rocks
+    NF6 - Created an api back-end using node and mongodb to store users scores
+*/
+
 export function randomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -15,6 +20,11 @@ export function intersectTwoEntities(lead,follow){
     return follow.y >= lead.y;
 }
 
+/*
+    -- U2 --
+    Function to determine if the obstacle the player is currently colliding
+    with is a rock. Enables players to jump over rocks
+*/
 export function jumpingOverRock(midAir,obstacleName){
     return midAir && obstacleName.includes('rock');
 }
@@ -34,7 +44,9 @@ export class Rect {
 }
 
 /*
-    Posts player data to api in order to save the users score.
+    -- NF6 --
+    Posts player data to api in order to save the users score. Function is aslo used to update the leaderboard
+    with the users' initials.
 */
 export async function saveScore(form_data){
     const xhr = new XMLHttpRequest();
@@ -61,8 +73,8 @@ export async function saveScore(form_data){
 }
 
 /*
-    Clears then populates the leaderboard. The id from the database is used for players
-    to set their initials on to their score.
+    -- NF6 --
+    Clears then populates the leaderboard.
 */
 export async function getLeaderboard(element){
     const xhr = new XMLHttpRequest();
