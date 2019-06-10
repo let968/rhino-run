@@ -98,22 +98,22 @@ We are looking forward to see what you come up with!
   Web Address: https://rhino-run.letourneau.io
 
   ** Bug fixes **
-    - Fixed bug that caused game crash when player tried to move left after crashing into an obstacle
-    - Fixed ability to move right when player tried to move right after crashing into an obstacle
-    - Fixed bug that crashed game when turning while in the air
+    - Fixed bug that caused game crash when player tried to move left after crashing into an obstacle (Entities/Skier.js)
+    - Fixed ability to move right when player tried to move right after crashing into an obstacle (Entities/Skier.js)
+    - Fixed bug that crashed game when turning while in the air (Entities/Skier.js)
 
   ** Updates **
-    - Added jump ability to player
-    - Added ability to jump over rocks
+    - Added jump ability to player (Entities/Skier.js)
+    - Added ability to jump over rocks (Entities/Skier.js)
   
   ** New Features **
-    - Startup, pause, and end game menu added to game
-    - Tutorial to help player understand the gameplay
-    - Score tracker for players
-    - Rhino that chases the player after a certain amount of points are reached
-    - Stats were added for each run
-    - Created an api back-end using node and mongodb to store users scores
-    - Leaderboard for high scores added
-    - Players can enter their initials on the leaderboard after their run
-    - Increased difficulty the further a player goes
+    - Startup, pause, and end game menu added to game (Core/Menu.js)
+    - Tutorial to help player understand the gameplay (Core/Menu.js)
+    - Score tracker for players (Core/Menu.js | Entities/Skier.js)
+    - Rhino that chases the player after a certain amount of points are reached (Entities/Rhino.js | Core/Game.js)
+    - Stats were added for each run (Entities/Skier.js | Core/Menu.js)
+    - Created an api back-end using node and mongodb to store users scores (Core/Utils.js)
+    - Leaderboard for high scores added (Core/Menu.js)
+    - Players can enter their initials on the leaderboard after their run (Core/Menu.js)
+    - Increased difficulty the further a player goes (Entities/Obstacles/ObstacleManager.js)
     - Deplayed to server at address https://rhino-run.letourneau.io
