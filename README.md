@@ -99,24 +99,24 @@ We are looking forward to see what you come up with!
 
   **Bug fixes**
   
-  * Fixed bug that caused game crash when player tried to move left after crashing into an obstacle (Entities/Skier.js)
-  * Fixed ability to move right when player tried to move right after crashing into an obstacle (Entities/Skier.js)
-  * Fixed bug that crashed game when turning while in the air (Entities/Skier.js)
+  1. Fixed bug that caused game crash when player tried to move left after crashing into an obstacle (Entities/Skier.js)
+  2. Fixed ability to move right when player tried to move right after crashing into an obstacle (Entities/Skier.js)
+  3. Fixed bug that crashed game when turning while in the air (Entities/Skier.js)
 
   **Updates**
   
-  * Added jump ability to player (Entities/Skier.js)
-  * Added ability to jump over rocks (Entities/Skier.js)
+  1. Added jump ability to player (Entities/Skier.js)
+  2. Added ability to jump over rocks (Entities/Skier.js)
   
   **New Features**
   
-  * Startup, pause, and end game menu added to game (Core/Menu.js)
-  * Tutorial to help player understand the gameplay (Core/Menu.js)
-  * Score tracker for players (Core/Menu.js | Entities/Skier.js)
-  * Rhino that chases the player after a certain amount of points are reached (Entities/Rhino.js | Core/Game.js)
-  * Stats were added for each run (Entities/Skier.js | Core/Menu.js)
-  * Created an api back-end using node and mongodb to store users scores (Core/Utils.js)
-  * Leaderboard for high scores added (Core/Menu.js)
-  * Players can enter their initials on the leaderboard after their run (Core/Menu.js)
-  * Increased difficulty the further a player goes (Entities/Obstacles/ObstacleManager.js)
-  * Deplayed to server at address https://rhino-run.letourneau.io
+  1. Startup, pause, and end game menu added to game (Core/Menu.js)
+  2. Tutorial to help player understand the gameplay (Core/Menu.js)
+  3. Score tracker for players (Core/Menu.js | Entities/Skier.js)
+  4. Rhino that chases the player after a certain amount of points are reached (Entities/Rhino.js | Core/Game.js)
+  5. Stats were added for each run (Entities/Skier.js | Core/Menu.js)
+  6. Created an api back-end using node and mongodb to store users scores (Core/Utils.js)
+  7. Leaderboard for high scores added (Core/Menu.js)
+  8. Players can enter their initials on the leaderboard after their run (Core/Menu.js)
+  9. Increased difficulty the further a player goes (Entities/Obstacles/ObstacleManager.js)
+  10. Deplayed to server at address https://rhino-run.letourneau.io
