@@ -9,6 +9,7 @@ import { Menu } from './Menu';
 
 export class Game{
     gameWindow = null;
+    state = 'B';
 
     constructor() {
         this.menu = new Menu();
@@ -19,8 +20,6 @@ export class Game{
         
         document.body.appendChild(this.scoreDisplay);
         document.addEventListener('keydown', this.handleKeyDown.bind(this));
-
-        this.state = 'B';
         
         this.menu.start.onclick = () => {
             this.startGame();
@@ -54,6 +53,7 @@ export class Game{
         this.state = 'S';
         this.run();
         this.skier.stats.score = 0;
+        this.updateScore();
 
         setTimeout(() => {
             this.state = 'I';
@@ -97,11 +97,16 @@ export class Game{
         this.skier.move();
         this.updateScore(skierPosition.y);
         
-        const previousGameWindow = this.gameWindow;
+        
+        const previousGameWindow = this.gameWindow;        
         this.calculateGameWindow();
         this.obstacleManager.placeNewObstacle(this.gameWindow, previousGameWindow);
         this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
         
+        /*
+            Rhino is called in after the user has traveled 5000 pixels and 
+            comes in from the top of the screen until he gets to 150 pixels away from the player
+        */
         if( !this.rhino && this.skier.stats.score > 5000 ){
             this.rhino = new Rhino(skierPosition.x, skierPosition.y - 500);
             this.rhino.speedBoost = 1.25;
@@ -113,7 +118,7 @@ export class Game{
         }
 
         
-        //if rhino reached player end the game
+        // end game if whino reaches player
         if( this.rhino && intersectTwoEntities(this.skier.getPosition(),this.rhino.getPosition()) ) {
             this.state = 'O';
             this.menu.addOverlay(this.state,this.skier.stats);            

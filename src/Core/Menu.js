@@ -11,12 +11,17 @@ export class Menu{
         this.background     = document.createElement("div");
         this.background.id  = 'overlay';
 
+        
         this.menu        = document.createElement('div');
+        
+        //On click events are set in the game class. 
         this.status      = document.createElement('div');
         this.start       = document.createElement('div');
         this.resume      = document.createElement('div');
         this.restart     = document.createElement('div');
         this.tutorial    = document.createElement('div');
+
+
         this.leaderboard = document.createElement('div');
         this.flex        = document.createElement('div');
 
@@ -81,6 +86,7 @@ export class Menu{
         `;
 
         getLeaderboard(this.leaderboard.querySelector('._target')).then(()=> {
+            this.findLeaderboardId('1234');
             switch (state) {
                 case 'B':
                     this.start.style.display   = 'block';
@@ -226,7 +232,11 @@ export class Menu{
         }
     }
 
-    findLeaderboardId($id){        
+    findLeaderboardId($id){
+        if( this.leaderboard.querySelector(`[id='${ $id }']`) == null ){
+            return;
+        }
+
         const leaderElement = this.leaderboard.querySelector(`[id='${ $id }']`);
         const firstChild = leaderElement.querySelector('div');
 

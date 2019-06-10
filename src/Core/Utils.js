@@ -33,6 +33,9 @@ export class Rect {
     }
 }
 
+/*
+    Posts player data to api in order to save the users score.
+*/
 export async function saveScore(form_data){
     const xhr = new XMLHttpRequest();
 
@@ -57,6 +60,10 @@ export async function saveScore(form_data){
     return promise;
 }
 
+/*
+    Clears then populates the leaderboard. The id from the database is used for players
+    to set their initials on to their score.
+*/
 export async function getLeaderboard(element){
     const xhr = new XMLHttpRequest();
 
@@ -66,9 +73,11 @@ export async function getLeaderboard(element){
                 if( xhr.status == 200 ){
                     let players = JSON.parse(xhr.responseText);
     
+                    //Clear leaderboard
                     if( element ){
-                        while(element.firstChild)
-                        element.removeChild( element.firstChild );
+                        while(element.firstChild){
+                            element.removeChild( element.firstChild );
+                        }
                     }
                     
                     if( players.length ){

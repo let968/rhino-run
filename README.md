@@ -95,6 +95,8 @@ We are looking forward to see what you come up with!
 
 ~~~~~ My Comments ~~~~~~
 
+  Web Address: https://rhino-run.letourneau.io
+
   ** Bug fixes **
     - Fixed bug that caused game crash when player tried to move left after crashing into an obstacle
     - Fixed ability to move right when player tried to move right after crashing into an obstacle
@@ -106,6 +108,7 @@ We are looking forward to see what you come up with!
   
   ** New Features **
     - Startup, pause, and end game menu added to game
+    - Tutorial to help player understand the gameplay
     - Score tracker for players
     - Rhino that chases the player after a certain amount of points are reached
     - Stats were added for each run
@@ -113,3 +116,4 @@ We are looking forward to see what you come up with!
     - Leaderboard for high scores added
     - Players can enter their initials on the leaderboard after their run
     - Increased difficulty the further a player goes
+    - Deplayed to server at address https://rhino-run.letourneau.io

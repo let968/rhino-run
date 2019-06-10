@@ -6,7 +6,7 @@ const DISTANCE_BETWEEN_OBSTACLES = 50;
 const STARTING_OBSTACLE_GAP = 100;
 const STARTING_OBSTACLE_REDUCER = 300;
 
-//cnaged to allow increasing difficulty
+//changed from const to allow difficutly change
 let NEW_OBSTACLE_CHANCE = 8; //Minimum is 3
 let DIFFICULTY = 0;
 
@@ -48,7 +48,9 @@ export class ObstacleManager {
 
     placeNewObstacle(gameWindow, previousGameWindow) {
         const shouldPlaceObstacle = randomInt(1, NEW_OBSTACLE_CHANCE);
-        if(shouldPlaceObstacle !== NEW_OBSTACLE_CHANCE) {
+
+        //Or statement fixes null object that would happen rarely on initial game load
+        if(shouldPlaceObstacle !== NEW_OBSTACLE_CHANCE || previousGameWindow == null) {
             return;
         }
 
@@ -115,7 +117,8 @@ export class ObstacleManager {
     }
 
     /*
-        TODO: add reason why this was done like this
+        Scaling increases every 10,000 pixels travelled.
+        Set as is to prevent coding with a switch statement or a lot of if else statements
     */
     scaleDifficulty(score){
         let newDifficulty = Math.floor(score / 10000);
