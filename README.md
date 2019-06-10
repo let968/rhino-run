@@ -95,6 +95,8 @@ We are looking forward to see what you come up with!
 
 # My Comments
 
+  The purpose of the new features I have added was to give the game an arcade-like feel. To give the users something to strive for (be on the top of the leaderboard).
+
   Web Address: https://rhino-run.letourneau.io
   
   At the top of files that have either a bug fix, update, and/or new feature, you will see a labelled annotation. Searching for the label throughout the page will help guide you through the new code that I have written.
